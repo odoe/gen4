@@ -14,15 +14,18 @@ node_js:
 cache:
   directories:
   - node_modules
+before_install:  
+- "export DISPLAY=:99.0"
+- "sh -e /etc/init.d/xvfb start"
+- wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
+- java -jar selenium-server-standalone-2.44.0.jar &> /dev/null &
 # Borrowed from https://github.com/dojo/core/blob/master/.travis.yml
 install:
 - travis_retry npm install grunt-cli $(node -e "var deps = require('./package.json').peerDependencies;
   for(var name in deps) process.stdout.write(name + '@' + deps[name] + ' ');")
 - travis_retry npm install
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3
+  - sleep 5
   - npm install -g bower
   - bower install
 script:
