@@ -2,7 +2,7 @@ define(function(require) {
   var registerSuite = require('intern!object');
   var assert = require('intern/chai!assert');
   var td = require('testdouble');
-  
+
   var datalist = require('app/components/datalist');
   var store = require('app/stores/app').default;
 
@@ -15,12 +15,12 @@ define(function(require) {
 
   var node = document.createElement('div');
   document.body.appendChild(node);
-  var allItems = store.getAllItems;
-  var addToUI = store.addToUI;
-  var zoomTo = store.zoomToItem;
   registerSuite({
     name: 'components/datalist',
     setup: function() {
+      td.replace(store, 'getAllItems');
+      td.replace(store, 'addToUI');
+      td.replace(store, 'zoomToItem');
     },
     beforeEach: function() {
     },
@@ -28,9 +28,6 @@ define(function(require) {
     },
     teardown: function() {
       td.reset();
-      store.getAllItems = allItems;
-      store.addToUI = addToUI;
-      store.zoomToItem = zoomTo;
     },
     'Create method watches for store update': function() {
       var dfd = this.async(1000);
@@ -42,8 +39,6 @@ define(function(require) {
       store.view = { then: then };
     },
     'whenViewReady - adds to UI and gets items': function() {
-      store.addToUI = td.function();
-      store.getAllItems = td.function();
       var container = {};
       whenViewReady(container)();
       td.verify(store.addToUI({ elem: container, position: 'bottom-right' }));
@@ -69,7 +64,6 @@ define(function(require) {
       assert.strictEqual(third, 0);
     },
     'selectHandler - zoom to selected row': function() {
-      store.zoomToItem = td.function();
       var data = {};
       selectHandler({ rows: [{ data: data }] });
       td.verify(store.zoomToItem('tri', data));
@@ -78,6 +72,6 @@ define(function(require) {
       var list = createList(node);
       assert.isOk(list);
       assert.equal(list.get('columns').length, 1);
-    } 
+    }
   });
 });

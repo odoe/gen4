@@ -5,9 +5,6 @@ define(function(require) {
 
   var Deferred = require('dojo/Deferred');
   var store = require('app/stores/app').default;
-  var allItems = store.getAllItems;
-  var addToUI = store.addToUI;
-  var zoomTo = store.zoomToItem;
 
   registerSuite({
     name: 'stores/app',
@@ -19,9 +16,6 @@ define(function(require) {
     },
     teardown: function() {
       td.reset();
-      store.getAllItems = allItems;
-      store.addToUI = addToUI;
-      store.zoomToItem = zoomTo;
     },
     'Store will watch for property changes': function() {
       var dfd = this.async(1000);

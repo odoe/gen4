@@ -31,7 +31,7 @@ define(function(require) {
       td.reset();
     },
     'View will add widgets': function() {
-      view.ui.add = td.function();
+      td.replace(view.ui, 'add');
       addWidgets(view);
       td.verify(view.ui.add(td.matchers.anything(), td.matchers.anything()))
     }
