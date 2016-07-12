@@ -28,7 +28,6 @@ define({
 	environments: [
 		// { browserName: 'chrome', version: '34', platform: [ 'Linux' ] }
 		{ browserName: 'chrome' },
-		{ browserName: 'firefox' }
 		// { browserName: 'internet explorer', version: '11', platform: 'Windows 8.1' },
 		// { browserName: 'internet explorer', version: '10', platform: 'Windows 8' },
 		// { browserName: 'internet explorer', version: '9', platform: 'Windows 7' },
