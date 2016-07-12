@@ -1,0 +1,9 @@
+{
+  "name": "gen4",
+  "version": "1.0.0",
+  "main": "main",
+  "description": "My ArcGIS JS App",
+  "homepage": "",
+  "dojoBuild": "app.profile.js"
+
+}
