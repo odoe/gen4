@@ -3,6 +3,8 @@
 ## gen4
 My ArcGIS JS App
 
+[Live Demo](http://odoe.net/apps/js4start/)
+
 # Usage
 `bower install`
 
