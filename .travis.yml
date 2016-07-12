@@ -1,19 +1,27 @@
-sudo: false
+sudo: required  
+dist: trusty  
 language: node_js
 node_js:
   - '6.1'
 cache:
   directories:
   - node_modules
-before_script:
-  - npm install -g bower
-  - bower install
+before_install:  
+ - export CHROME_BIN=/usr/bin/google-chrome
+ - export DISPLAY=:99.0 
+ - sh -e /etc/init.d/xvfb start
+ - sudo apt-get update
+ - sudo apt-get install -y libappindicator1 fonts-liberation
+ - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+ - sudo dpkg -i google-chrome*.deb
 # Borrowed from https://github.com/dojo/core/blob/master/.travis.yml
 install:
 - travis_retry npm install grunt-cli $(node -e "var deps = require('./package.json').peerDependencies;
   for(var name in deps) process.stdout.write(name + '@' + deps[name] + ' ');")
 - travis_retry npm install
-
+before_script:
+  - npm install -g bower
+  - bower install
 script:
 - grunt
 - node_modules/.bin/intern-runner config=tests/intern
