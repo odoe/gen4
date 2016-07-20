@@ -166,6 +166,14 @@ module.exports = function (grunt) {
         src: 'built/esri/images/basemap/hybrid.jpg',
         dest: 'release/resources/esri/images/basemap/hybrid.jpg'
       },
+
+      // search widget images
+      // Use this same pattern if you come across other
+      // cases where images are loaded via require.toUrl() method
+      releasesearch: {
+        src: 'built/esri/widgets/Search/images/search-symbol-32.png',
+        dest: 'release/resources/esri/images/search-symbol-32.png'
+      },
     
       moment: {
         cwd: 'built/',
@@ -188,13 +196,22 @@ module.exports = function (grunt) {
           'release/app.js': 'built/dojo/dojo.js'
         },
         options: {
-          replacements: [{
-            pattern: '../images/basemap/hybrid.jpg',
-            replacement: 'resources/esri/images/basemap/hybrid.jpg'
-          }, {
-            pattern: '../images/basemap/topo.jpg',
-            replacement: 'resources/esri/images/basemap/topo.jpg'
-          }]
+          replacements: [
+            // basemap toggle widget
+            {
+              pattern: '../images/basemap/hybrid.jpg',
+              replacement: 'resources/esri/images/basemap/hybrid.jpg'
+            },
+            {
+              pattern: '../images/basemap/topo.jpg',
+              replacement: 'resources/esri/images/basemap/topo.jpg'
+            },
+            // Search widget
+            {
+              pattern: './images/search-symbol-32.png',
+              replacement: 'resources/esri/images/search-symbol-32.png'
+            }
+          ]
         }
       }
     },
@@ -302,7 +319,7 @@ module.exports = function (grunt) {
     'copy:release', 'copy:releaseapp', 'copy:releasevtiles',
     'copy:releaseblank', 'copy:releaseconfig',
     
-    'copy:releasetopo', 'copy:releasehybrid',
+    'copy:releasetopo', 'copy:releasehybrid', 'copy:releasesearch',
     'string-replace',
     
     'cacheBust', 'copy:moment']);

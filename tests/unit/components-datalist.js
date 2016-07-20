@@ -29,15 +29,6 @@ define(function(require) {
     teardown: function() {
       td.reset();
     },
-    'Create method watches for store update': function() {
-      var dfd = this.async(1000);
-      var then = td.function();
-      factory.create();
-      store.watch('view', dfd.callback(function() {
-        td.verify(then(td.matchers.anything()));
-      }));
-      store.view = { then: then };
-    },
     'whenViewReady - adds to UI and gets items': function() {
       var container = {};
       whenViewReady(container)();

@@ -2,12 +2,10 @@ define(function(require) {
   var registerSuite = require('intern!object');
   var assert = require('intern/chai!assert');
 
-  var MapView = require('esri/views/MapView');
-
   var webmap = require('app/components/webmap').default;
 
-  var node = document.createElement('div');
-  document.body.appendChild(node);
+  var node;
+  var view;
 
   registerSuite({
     name: 'components/webmap',
@@ -18,9 +16,9 @@ define(function(require) {
       document.body.appendChild(node);
     },
     afterEach: function() {
+      view.destroy();
     },
     teardown: function() {
-      view.destroy();
     },
     'Will create a MapView': function() {
       var options = {
@@ -38,7 +36,7 @@ define(function(require) {
         params: {},
         node: node
       };
-      webmap.create(options);
+      view = webmap.create(options);
       var elem = document.querySelector('.view-div');
       assert.isOk(elem);
     }

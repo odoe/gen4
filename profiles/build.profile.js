@@ -120,7 +120,7 @@ var profile = {
       exclude: [
         'app/config'
       ],
-      includeLocales: ['en-us']
+      includeLocales: ['en-us', 'es']
     }//,
 
     // In this demo application, we load `app/main` on the client-side, so here we could build a separate layer containing
@@ -187,7 +187,8 @@ var profile = {
     },
     paths: {
       'app/config': './config',
-      'esri/layers/vector-tile': './vector-tile'
+      'esri/layers/vector-tile': './vector-tile',
+      'moment': './moment'
     }
   }
 };
